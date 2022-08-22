@@ -105,24 +105,42 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KullaniciController.cs" />
+    <Compile Include="Controllers\MakaleController.cs" />
+    <Compile Include="Controllers\YetkiliController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\OrtakSinif.cs" />
     <Compile Include="Models\BlogDB.cs" />
+    <Compile Include="Models\Etiket.cs" />
+    <Compile Include="Models\Kategori.cs" />
     <Compile Include="Models\Kullanici.cs" />
     <Compile Include="Models\Makale.cs" />
-    <Compile Include="Models\sysdiagrams.cs" />
+    <Compile Include="Models\Yetki.cs" />
     <Compile Include="Models\Yorum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <Content Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Kullanici\Create.cshtml" />
-    <Content Include="Views\Kullanici\Login.cshtml" />
+    <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Kullanici\Profil.cshtml" />
+    <Content Include="Views\Kullanici\Index.cshtml" />
+    <Content Include="Views\Makale\Create.cshtml" />
+    <Content Include="Views\Kullanici\Edit.cshtml" />
+    <Content Include="Views\Makale\KisiMakaleListele.cshtml" />
+    <Content Include="Views\Makale\Details.cshtml" />
+    <Content Include="Views\Makale\Edit.cshtml" />
+    <Content Include="Views\Makale\Index.cshtml" />
+    <Content Include="Views\Makale\YorumListele.cshtml" />
+    <Content Include="Views\Yetkili\Hata.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

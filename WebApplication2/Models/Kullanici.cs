@@ -16,26 +16,34 @@ namespace WebApplication2.Models
             Yorum = new HashSet<Yorum>();
         }
 
-        public int Id { get; set; }
+        public int id { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string KullaniciAdi { get; set; }
+        public string KullaniciId { get; set; }
 
         [Required]
         [StringLength(50)]
         public string Sifre { get; set; }
 
         [StringLength(50)]
-        public string Ad { get; set; }
+        public string isim { get; set; }
 
         [StringLength(50)]
-        public string Soyad { get; set; }
+        public string Soyisim { get; set; }
+
+        public int YetkiId { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime KayitTarihi { get; set; }
+
+        public virtual Yetki Yetki { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Makale> Makale { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Yorum> Yorum { get; set; }
+        public string KullaniciAdi { get; internal set; }
     }
 }

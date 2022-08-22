@@ -17,18 +17,28 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("OMER's BLOG", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse navbar-right">
+
                 @if (Session["username"] == null)
                 {
-                    @Html.ActionLink("Kayıt Ol", "Create", "Kullanici", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Giriş Yap", "Login", "Kullanici", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("OMER's BLOG", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
 
                 }
                 else
                 {
-                    @Html.ActionLink(Session["username"].ToString(), "Detail", "Kullanici", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("OMER's BLOG", "Index", "Kullanici", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Makaleler", "Index", "Makale", new { area = "" }, new { @class = "navbar-brand" })
+                }
+            </div>
+            <div class="navbar-collapse collapse navbar-right">
+                @if (Session["username"] == null)
+                {
+                    @Html.ActionLink("Kayıt Ol", "Create", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Giriş Yap", "Login", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+                }
+                else
+                {
+                    @Html.ActionLink(Session["username"].ToString(), "Profil", "Kullanici", new { area = "" }, new { @class = "navbar-brand" })
                     @Html.ActionLink("Çıkış Yap", "Logout", "Kullanici", new { area = "" }, new { @class = "navbar-brand" })
                 }
 
@@ -46,5 +56,6 @@
 
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>

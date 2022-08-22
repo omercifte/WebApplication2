@@ -3,113 +3,81 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication2.Helpers;
 using WebApplication2.Models;
+
 
 namespace WebApplication2.Controllers
 {
-    public class KullaniciController : Controller
+    public class KullaniciController : YetkiliController
     {
         BlogDB db = new BlogDB();
 
         // GET: Kullanici
         public ActionResult Index()
         {
-            return View();
+            string kullaniciadi = Session["username"].ToString();
+            var kullanici = db.Kullanici.Where(i => i.KullaniciAdi == kullaniciadi).SingleOrDefault();
+            
+            return View(kullanici);
         }
 
         // GET: Kullanici/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var kisi = db.Kullanici.Where(i => i.id==id).SingleOrDefault();
+            return View(kisi);
         }
-
-        public ActionResult Login()
+        public ActionResult Profil()
         {
-            return View();
+            string kullaniciadi = Session["username"].ToString();
+            var kisi = db.Kullanici.Where(i => i.KullaniciAdi ==kullaniciadi).SingleOrDefault();
+            return View(kisi);
         }
 
-        [HttpPost]
-        public ActionResult Login(Kullanici model)
-
-        {
-            try
-            {
-                var varmi = db.Kullanici.Where(i => i.KullaniciAdi == model.KullaniciAdi).SingleOrDefault();
-                if(varmi==null)
-                {
-                    return View();
-                }
-                if  (varmi.Sifre == model.Sifre)
-                {
-                    Session["username"] = model.KullaniciAdi;
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    return View();
-                }
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Kullanici/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Kullanici/Create
-        [HttpPost]
-        public ActionResult Create(Kullanici model )
-        {
-            try
-            {
-                var varmi = db.Kullanici.Where(i => i.KullaniciAdi == model.KullaniciAdi).SingleOrDefault();
-
-                if(varmi!=null)
-                {
-                    return View();
-                }
-
-                if (string.IsNullOrEmpty(model.Sifre))
-                {
-                    return View();
-                }
-                db.Kullanici.Add(model);
-                db.SaveChanges();
-
-                Session["username"] = model.KullaniciAdi;
-
-                return RedirectToAction("Index","Home");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
+       
         public ActionResult Logout()
         {
-            Session["usernam"] = null;
+            Session["username"] = null;
             return RedirectToAction("Index", "Home");
         }
+
+
+
         // GET: Kullanici/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            string kullaniciadi = Session["username"].ToString();
+            var user = db.Kullanici.Where(i => i.KullaniciAdi == kullaniciadi).SingleOrDefault();
+            if(OrtakSinif.EditIzinYetkiVarmi(id,user))
+            {
+                var kisi = db.Kullanici.Where(i => i.id == id).SingleOrDefault();
+                return View(kisi);
+            }
+            return HttpNotFound();
         }
+        
+
+
+
+
+
+
+
+
 
         // POST: Kullanici/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Kullanici model)
         {
             try
             {
-                // TODO: Add update logic here
 
+                var kisi = db.Kullanici.Where(i => i.id == id).SingleOrDefault();
+                kisi.isim = model.isim;
+                kisi.Soyisim = model.Soyisim;
+                kisi.Sifre = model.Sifre;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch

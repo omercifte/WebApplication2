@@ -9,15 +9,16 @@ namespace WebApplication2.Models
     [Table("Yorum")]
     public partial class Yorum
     {
-        public int Id { get; set; }
+        public int id { get; set; }
 
-        [Column("Yorum")]
         [Required]
-        public string Yorum1 { get; set; }
+        public string YorumIcerik { get; set; }
 
         public int KullaniciId { get; set; }
 
         public int MakaleId { get; set; }
+
+        public DateTime Tarih { get; set; }
 
         public virtual Kullanici Kullanici { get; set; }
 

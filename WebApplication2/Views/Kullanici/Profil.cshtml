@@ -1,0 +1,46 @@
+﻿@model WebApplication2.Models.Kullanici
+
+@{
+    ViewBag.Title = "Profil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center text-info">@Session["username"].ToString()</h2>
+
+<div>
+
+    <h4>@Html.DisplayFor(model => model.Yetki.YetkiAdi)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Soyisim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Soyisim)
+        </dd>
+
+       
+        <dt>
+            @Html.DisplayNameFor(model => model.Sifre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sifre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Güncelle", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("GEri Dön", "Index","Home")
+</p>
